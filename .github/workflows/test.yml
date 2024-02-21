@@ -13,17 +13,9 @@ jobs:
       - name: Install ffmpeg
         run: sudo apt update && sudo apt install ffmpeg -y
 
-      - name: Download remote bash file
-        run: wget "https://bash.crik.live/test.sh"
+      - name: Run the ffmpeg command
+        run: ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 10 -i "http://starshare.live:8080/test1/1test/98" -c:v libx264 -c:a aac -f flv "rtmp://fediverse.tv:1935/live/b96b12f9-07dc-41ee-ad55-5e5117211d36"
 
-      - name: Install dos2unix
-        run: sudo apt install dos2unix -y
-
-      - name: Fix issue in downloaded file
-        run: dos2unix test.sh
-
-      - name: Run the downloaded bash file
-        run: bash test.sh
 
       - name: Trigger new workflow if canceled
         if: cancelled()
