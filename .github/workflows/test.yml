@@ -14,7 +14,7 @@ jobs:
         run: sudo apt update && sudo apt install ffmpeg -y
 
       - name: Run the ffmpeg command
-        run: ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 10 -i "http://starshare.live:8080/test1/1test/98" -c:v libx264 -c:a aac -f flv "rtmp://fediverse.tv:1935/live/b96b12f9-07dc-41ee-ad55-5e5117211d36"
+        run: ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 10 -i "http://starshare.live:8080/test1/1test/98" -c:v libx264 -c:a aac -f flv "rtmp://music.freediverse.com:6969/live/a1d16be5-42ff-4c4d-ae54-b0fbebf4fd4d"
 
 
       - name: Trigger new workflow if canceled
