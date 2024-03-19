@@ -20,7 +20,7 @@ jobs:
         run: sudo wget https://github.com/rustdesk/rustdesk/releases/download/1.2.3/rustdesk-1.2.3-x86_64.deb
 
       - name: Install RustDesk
-        run: sudo apt install ./rustdesk-1.1.9.deb -y
+        run: sudo dpkg -i rustdesk-1.1.9.deb
 
       - name: find details
         run: sudo rustdesk --info
