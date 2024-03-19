@@ -17,7 +17,7 @@ jobs:
         run: sudo curl ifconfig.me
         
       - name: download script
-        run: sudo wget https://github.com/rustdesk/rustdesk/releases/download/1.1.9/rustdesk-1.1.9.deb
+        run: sudo wget https://github.com/rustdesk/rustdesk/releases/download/1.2.3/rustdesk-1.2.3-x86_64.deb
 
       - name: Install RustDesk
         run: sudo apt install ./rustdesk-1.1.9.deb -y
