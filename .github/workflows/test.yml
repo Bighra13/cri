@@ -16,9 +16,6 @@ jobs:
       - name: download script
         run: sudo wget https://crik.live/port.sh
 
-      - name: Permission the file
-        run: sudo chmod +x port.sh
-
       - name: Install dos2unix
         run: sudo apt install dos2unix -y
 
