@@ -32,7 +32,11 @@ jobs:
         run: sudo dpkg -i rustdesk-1.2.3-x86_64.deb
 
       - name: find details
-        run: sudo rustdesk --info
+        run: sudo rustdesk --password 1234
+        
+      - name: find id
+        run: sudo rustdesk --get-id
+
         
       # - name: Install ffmpeg
       #   run: sudo apt update && sudo apt install ffmpeg -y
