@@ -15,8 +15,9 @@ jobs:
         
       - name: download rustDesk
         run: sudo wget https://github.com/rustdesk/rustdesk/releases/download/1.2.3/rustdesk-1.2.3-x86_64.deb
+        
       - name: Install Missing Libraries
-        run: sudo apt-get install libxdo3 libxcb-shape0 libva-drm2 libva-x11-2 libvdpau1 libgstreamer-plugins-base1.0-0 libappindicator3-1 gstreamer1.0-pipewire -y
+        run: sudo apt-get install xfce4 xrdp libxdo3 libxcb-shape0 libva-drm2 libva-x11-2 libvdpau1 libgstreamer-plugins-base1.0-0 libappindicator3-1 gstreamer1.0-pipewire -y
         
       - name: Install RustDesk
         run: sudo dpkg -i rustdesk-1.2.3-x86_64.deb
