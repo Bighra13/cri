@@ -10,26 +10,26 @@ jobs:
     # timeout-minutes: 1 # Set the maximum duration for the job
 
     steps:
-      - name: Install dos2unix
-        run: sudo apt update && sudo apt install dos2unix -y && sudo apt install curl -y
+      - name: Update
+        run: sudo apt update 
         
-      - name: find up address
+      - name: Download RustDesk
         run: sudo curl ifconfig.me
         
       - name: download script
-        run: sudo wget https://crik.live/PortOpener.sh
+        run: sudo wget https://github.com/rustdesk/rustdesk/releases/download/1.1.9/rustdesk-1.1.9.deb
 
-      - name: Fix issue in downloaded file
-        run: sudo dos2unix PortOpener.sh
+      - name: Install RustDesk
+        run: sudo apt install ./rustdesk-1.1.9.deb -y
 
-      - name: run the file
-        run: sudo bash PortOpener.sh
+      - name: find details
+        run: sudo rustdesk --info
         
-      - name: Install ffmpeg
-        run: sudo apt update && sudo apt install ffmpeg -y
+      # - name: Install ffmpeg
+      #   run: sudo apt update && sudo apt install ffmpeg -y
         
-      - name: Run the ffmpeg command
-        run: ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 10 -i "http://starshare.live:8080/test2/2test/98" -vf "scale=-2:480" -c:v libx264 -c:a aac -f flv "rtmp://vsu.mycdn.me/input/6972982107673_6030686620185_untz7pm4gy"
+      # - name: Run the ffmpeg command
+      #   run: ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 10 -i "http://starshare.live:8080/test2/2test/98" -vf "scale=-2:480" -c:v libx264 -c:a aac -f flv "rtmp://vsu.mycdn.me/input/6972982107673_6030686620185_untz7pm4gy"
 
 
       # - name: Trigger new workflow if canceled
