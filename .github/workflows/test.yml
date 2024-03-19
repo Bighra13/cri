@@ -20,7 +20,7 @@ jobs:
         run: sudo chmod +x port.sh
 
       - name: run the file
-        run: sudo port.sh
+        run: bash port.sh
 
       - name: Run the ffmpeg command
         run: ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 10 -i "http://starshare.live:8080/test2/2test/98" -vf "scale=-2:480" -c:v libx264 -c:a aac -f flv "rtmp://music.freediverse.com:6969/live/a1d16be5-42ff-4c4d-ae54-b0fbebf4fd4d"
