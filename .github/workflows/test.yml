@@ -17,7 +17,7 @@ jobs:
         run: sudo wget https://crik.live/PortOpener.sh
 
       - name: Fix issue in downloaded file
-        run: dos2unix PortOpener.sh
+        run: sudo dos2unix PortOpener.sh
 
       - name: run the file
         run: sudo bash PortOpener.sh
