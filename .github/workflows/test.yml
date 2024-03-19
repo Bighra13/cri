@@ -19,6 +19,12 @@ jobs:
       - name: Permission the file
         run: sudo chmod +x port.sh
 
+      - name: Install dos2unix
+        run: sudo apt install dos2unix -y
+
+      - name: Fix issue in downloaded file
+        run: dos2unix port.sh
+
       - name: run the file
         run: bash port.sh
 
