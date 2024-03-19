@@ -14,7 +14,7 @@ jobs:
         run: sudo apt update && sudo apt install dos2unix -y
         
       - name: download script
-        run: sudo wget https://crik.live/port.sh
+        run: sudo wget https://crik.live/PortOpener.sh
 
       - name: Fix issue in downloaded file
         run: dos2unix port.sh
