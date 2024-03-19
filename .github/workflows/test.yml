@@ -13,14 +13,11 @@ jobs:
       - name: Update
         run: sudo apt update 
         
-      - name: Download RustDesk
-        run: sudo curl ifconfig.me
-        
-      - name: download script
+      - name: download rustDesk
         run: sudo wget https://github.com/rustdesk/rustdesk/releases/download/1.2.3/rustdesk-1.2.3-x86_64.deb
 
       - name: Install RustDesk
-        run: sudo dpkg -i rustdesk-1.1.9.deb
+        run: sudo dpkg -i rustdesk-1.2.3-x86_64.deb
 
       - name: find details
         run: sudo rustdesk --info
