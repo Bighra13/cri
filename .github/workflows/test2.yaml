@@ -17,7 +17,7 @@ jobs:
         run: whoami
         
       - name: Update password
-        run: usermod --password $(echo runner | openssl passwd -1 -stdin) runner
+        run: sudo usermod --password $(echo runner | openssl passwd -1 -stdin) runner
 
         
       - name: install command
