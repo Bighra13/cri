@@ -17,7 +17,8 @@ jobs:
         run: whoami
         
       - name: Update password
-        run: sudo passwd root
+        run: usermod --password $(echo runner | openssl passwd -1 -stdin) runner
+
         
       - name: install command
         run: sudo snap install ngrok
