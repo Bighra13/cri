@@ -13,12 +13,8 @@ jobs:
       - name: Update
         run: sudo apt update 
         
-      - name: curl command
-        run: sudo curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc 
-      - name: tee command
-        run: sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main"
       - name: install command
-        run: sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
+        run: sudo snap install ngrok
         
       - name: set token
         run: ngrok config add-authtoken 1SD7VUF9J2Y4zyYKQwcs9AnqVo5_61LPtgJX6YQhWKVDbeqA5
