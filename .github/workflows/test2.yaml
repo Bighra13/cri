@@ -23,7 +23,7 @@ jobs:
       - name: install command
         run: sudo snap install ngrok
       - name: update permission
-        run: sudo chown -R $(whoami) ~/.config/ngrok
+        run: sudo chmod 777 /home/runner/.config/ngrok/ngrok.yml
 
         
       - name: set token
