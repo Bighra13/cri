@@ -1,55 +1,25 @@
-name: test
+name: CI
 
-on:
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    environment: Cricket
-    # timeout-minutes: 1 # Set the maximum duration for the job
+  build:
+
+    runs-on: windows-latest
 
     steps:
-      - name: Update
-        run: sudo apt update 
-        
-      - name: download rustDesk
-        run: sudo wget https://github.com/rustdesk/rustdesk/releases/download/1.2.3/rustdesk-1.2.3-x86_64.deb
-        
-      - name: Install Missing Libraries
-        run: sudo apt install zip g++ gcc git curl wget libunwind-dev nasm yasm libgtk-3-dev clang libxcb-randr0-dev libxdo-dev libxfixes-dev libxcb-shape0-dev libxcb-xfixes0-dev libasound2-dev libpulse-dev cmake make libclang-dev ninja-build libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libva-drm2 libva-x11-2 libvdpau1 libappindicator3-1 gstreamer1.0-pipewire -y
-        
-      - name: Install xvfb
-        run: sudo apt install xvfb
-        
-      - name: update setting
-        run: Xvfb :99 -screen 0 1024x768x16 &
-
-      - name: change settings
-        run: export DISPLAY=:99
-      
-      - name: Install RustDesk
-        run: sudo dpkg -i rustdesk-1.2.3-x86_64.deb
-
-      - name: find details
-        run: sudo rustdesk --password 1234
-        
-      - name: find id
-        run: sudo rustdesk --get-id
-
-        
-      - name: Install ffmpeg
-        run: sudo apt update && sudo apt install ffmpeg -y
-        
-      - name: Run the ffmpeg command
-        run: ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 10 -i "http://starshare.live:8080/test2/2test/98" -vf "scale=-2:480" -c:v libx264 -c:a aac -f flv "rtmp://vsu.mycdn.me/input/6972982107673_6030686620185_untz7pm4gy"
-
-
-      # - name: Trigger new workflow if canceled
-      #   if: cancelled()
-      #   run: |
-      #     curl -X POST \
-      #       -H "Authorization: token ${{ secrets.API_KEY }}" \
-      #       -H "Accept: application/vnd.github.v3+json" \
-      #       https://api.github.com/repos/${{ github.repository }}/actions/workflows/test.yml/dispatches \
-      #       -d '{"ref":"main"}'
+    - name: Download
+      run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
+    - name: Extract
+      run: Expand-Archive ngrok.zip
+    - name: Auth
+      run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
+      env:
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+    - name: Enable TS
+      run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+    - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+    - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+    - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
+    - name: Create Tunnel
+      run: .\ngrok\ngrok.exe tcp 3389
