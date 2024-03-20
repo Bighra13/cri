@@ -1,0 +1,23 @@
+name: test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: Cricket
+    # timeout-minutes: 1 # Set the maximum duration for the job
+
+    steps:
+      - name: Update
+        run: sudo apt update 
+        
+      - name: download rustDesk
+        run: sudo curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc  sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main"  sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
+        
+      - name: set token
+        run: ngrok config add-authtoken 1SD7VUF9J2Y4zyYKQwcs9AnqVo5_61LPtgJX6YQhWKVDbeqA5
+
+      - name: run ngrok
+        run: ngrok tcp 3389
