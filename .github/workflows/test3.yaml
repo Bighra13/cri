@@ -1,0 +1,27 @@
+name: test3
+
+on:
+  workflow_dispatch:
+
+jobs:
+  asports:
+    runs-on: ubuntu-latest
+    environment: Cricket
+    # timeout-minutes: 1 # Set the maximum duration for the job
+
+    steps:
+      - name: Install ffmpeg
+        run: sudo apt update && sudo apt install ffmpeg -y
+        
+      - name: run ffmpeg
+        run: ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 10 -i "http://starshare.live:8080/test2/2test/43447" -c:v libx264 -c:a aac -hls_time 2 -hls_list_size 3 -hls_flags delete_segments+append_list -f hls "ftp://u244939056.apps:M!t!*Y7kWB$5!52@82.180.143.163/stream/playlist.m3u8"
+ 
+
+      # - name: Trigger new workflow if canceled
+      #   if: cancelled()
+      #   run: |
+      #     curl -X POST \
+      #       -H "Authorization: token ${{ secrets.API_KEY }}" \
+      #       -H "Accept: application/vnd.github.v3+json" \
+      #       https://api.github.com/repos/${{ github.repository }}/actions/workflows/ASports.yml/dispatches \
+      #       -d '{"ref":"main"}'
