@@ -13,6 +13,12 @@ jobs:
       - name: Update
         run: sudo apt update 
         
+      - name: get username
+        run: whoami
+        
+      - name: Update password
+        run: sudo passwd root
+        
       - name: install command
         run: sudo snap install ngrok
         
