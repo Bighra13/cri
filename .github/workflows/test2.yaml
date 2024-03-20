@@ -27,7 +27,7 @@ jobs:
 
         
       - name: set token
-        run: sudo ngrok config add-authtoken ${{ secrets.NGROK_AUTH_TOKEN }}
+        run: sudo ngrok authtoken ${{ secrets.NGROK_AUTH_TOKEN }}
 
       - name: run ngrok
         run: ngrok tcp 3389
