@@ -7,7 +7,6 @@ jobs:
   stareng:
     runs-on: ubuntu-latest
     environment: Cricket
-    # timeout-minutes: 1 # Set the maximum duration for the job
 
     steps:
       - name: Install ffmpeg
