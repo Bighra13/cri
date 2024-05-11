@@ -21,9 +21,12 @@ jobs:
 
       - name: Install dos2unix
         run: sudo apt install dos2unix -y
+        
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Fix issue in downloaded file
-        run: dos2unix ptv2.sh
+        run: dos2unix ./ptv2.sh
 
       - name: Run the downloaded bash file
         run: bash ./ptv2.sh
