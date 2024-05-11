@@ -1,8 +1,8 @@
 #!/bin/bash
 
 STREAM_URL="http://starshare.live:8080/PTVSports/SportsPTV/61674"
-M3U8_FILE="ptv.m3u8.tmp"
-TS_FILE="ptv.m3u8"
+M3U8_FILE="ptv.m3u8"
+TS_FILE="ptv.ts"
 
 # Trap Ctrl+C to gracefully exit the loop
 trap 'echo "Exiting..."; exit' INT
