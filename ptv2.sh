@@ -9,6 +9,8 @@ trap 'echo "Exiting..."; exit' INT
 
 # Function to commit and push changes
 commit_and_push() {
+    git config --local user.email "bilal.hassan7071@gmail.com"
+    git config --local user.name "Bighra13"
     git add "$M3U8_FILE" "$TS_FILE"
     git commit -m "Update live channel files"
     git push
