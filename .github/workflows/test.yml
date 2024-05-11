@@ -1,0 +1,15 @@
+name: GitHub Actions Demo
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  explore-github-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Access and run my_script.sh
+        run: bash ./my_script.sh
