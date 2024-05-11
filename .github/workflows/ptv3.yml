@@ -17,12 +17,13 @@ jobs:
           rm -f ptv0.ts
           ffmpeg -i http://starshare.live:8080/PTVSports/SportsPTV/61674 -c copy -f hls -hls_time 30 -hls_list_size 2 -hls_flags delete_segments ptv.m3u8 &
 
-      - name: Configure Git and Push Changes in background
+      - name: Run Git commands every 30 seconds in background
         run: |
-          git config --global user.email "bilal.hassan7071@gmail.com"
-          git config --global user.name "Bighra13"
-          while sleep 30; do
+          while true; do
+            git config --global user.email "bilal.hassan7071@gmail.com"
+            git config --global user.name "Bighra13"
             git add ptv.m3u8 ptv0.ts
             git commit -m "Update live channel files"
             git push
+            sleep 30
           done &
