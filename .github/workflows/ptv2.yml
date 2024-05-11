@@ -1,28 +1,25 @@
-name: ptvsports2
+name: Create Text File
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
 
 jobs:
-  ptvsports2:
+  create_text_file:
     runs-on: ubuntu-latest
-    environment: Cricket
 
     steps:
-      - name: Install ffmpeg
-        run: sudo apt update && sudo apt install ffmpeg -y
-
-      - name: Install dos2unix
-        run: sudo apt install dos2unix -y
-        
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Fix issue in downloaded file
-        run: dos2unix ./ptv2.sh
+      - name: Create a text file
+        run: echo "Your text content here" > yourfile.txt
 
-      - name: Run the downloaded bash file
-        run: bash ./ptv2.sh
+      - name: Commit and push
+        run: |
+          git config --local user.email "you@example.com"
+          git config --local user.name "Your Name"
+          git add yourfile.txt
+          git commit -m "Add new text file"
+          git push
