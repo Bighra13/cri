@@ -26,11 +26,5 @@ commit_and_push &
 while true; do
     rm -f "$TS_FILE"
     ffmpeg -i "$STREAM_URL" -c copy -f hls -hls_time 30 -hls_list_size 2 -hls_flags delete_segments "$M3U8_FILE"
-    
-    # Check if the .m3u8 file exists before trying to move it
-    if [ -f "$M3U8_FILE.tmp" ]; then
-        mv "$M3U8_FILE.tmp" "$M3U8_FILE"
-    fi
-    
     sleep 30
 done
