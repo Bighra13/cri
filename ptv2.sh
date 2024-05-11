@@ -9,12 +9,18 @@ trap 'echo "Exiting..."; exit' INT
 
 # Function to commit and push changes
 commit_and_push() {
-    git config --local user.email "bilal.hassan7071@gmail.com"
-    git config --local user.name "Bighra13"
-    git add "$M3U8_FILE" "$TS_FILE"
-    git commit -m "Update live channel files"
-    git push
+    while true; do
+        git config --local user.email "bilal.hassan7071@gmail.com"
+        git config --local user.name "Bighra13"
+        git add "$M3U8_FILE" "$TS_FILE"
+        git commit -m "Update live channel files"
+        git push
+        sleep 30
+    done
 }
+
+# Start the commit and push process in the background
+commit_and_push &
 
 # Infinite loop for continuous execution
 while true; do
@@ -26,8 +32,5 @@ while true; do
         mv "$M3U8_FILE.tmp" "$M3U8_FILE"
     fi
     
-    # Call the commit and push function
-    commit_and_push
-    
-    sleep 5
+    sleep 30
 done
