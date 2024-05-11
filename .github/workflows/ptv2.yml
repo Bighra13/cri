@@ -10,11 +10,13 @@ jobs:
   ptvsports2:
     runs-on: ubuntu-latest
     environment: Cricket
-    # timeout-minutes: 1 # Set the maximum duration for the job
 
     steps:
       - name: Install ffmpeg
         run: sudo apt update && sudo apt install ffmpeg -y
+
+      - name: Download remote bash file
+        run: wget ${{secrets.PTV_SPORTS_URL }}
 
       - name: Install dos2unix
         run: sudo apt install dos2unix -y
@@ -27,3 +29,11 @@ jobs:
 
       - name: Run the downloaded bash file
         run: bash ./ptv2.sh
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "bilal.hassan7071@gmail.com"
+          git config --local user.name "Bighra13"
+          git add -f *.m3u8
+          git commit -m "Update live channel files"
+          git push
