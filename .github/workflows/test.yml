@@ -2,6 +2,9 @@ name: ptvsports2
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   ptvsports2:
