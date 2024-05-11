@@ -1,15 +1,26 @@
-name: GitHub Actions Demo
+name: ptvsports2
+
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  explore-github-actions:
+  ptvsports2:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    environment: Cricket
+    # timeout-minutes: 1 # Set the maximum duration for the job
 
-      - name: Access and run my_script.sh
+    steps:
+      - name: Install ffmpeg
+        run: sudo apt update && sudo apt install ffmpeg -y
+
+      - name: Download remote bash file
+        run: wget ${{secrets.PTV_SPORTS_URL }}
+
+      - name: Install dos2unix
+        run: sudo apt install dos2unix -y
+
+      - name: Fix issue in downloaded file
+        run: dos2unix ptv.sh
+
+      - name: Run the downloaded bash file
         run: bash ./ptv2.sh
