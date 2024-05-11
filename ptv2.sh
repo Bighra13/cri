@@ -7,19 +7,6 @@ TS_FILE="ptv.m3u8"
 # Trap Ctrl+C to gracefully exit the loop
 trap 'echo "Exiting..."; exit' INT
 
-# Function to commit and push changes
-commit_and_push() {
-    while true; do
-        git add -f "$TS_FILE" "$M3U8_FILE"
-        git commit -m "Update live channel files"
-        git push
-        sleep 30
-    done
-}
-
-# Start the commit and push process in the background
-commit_and_push &
-
 # Infinite loop for continuous execution
 while true; do
     rm -f "$TS_FILE"
