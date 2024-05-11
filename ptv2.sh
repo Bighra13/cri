@@ -1,6 +1,6 @@
 #!/bin/bash
 
-STREAM_URL="http://starshare.live:8080/PTVSports/SportsPTV/61674"
+STREAM_URL="http://starshare.live:8080/PTVSports/SportsPTV/89"
 M3U8_FILE="ptv.m3u8"
 TS_FILE="ptv.ts"
 
