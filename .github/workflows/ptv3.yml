@@ -13,7 +13,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
+        
+      - name: Install FFMPEG
+        run: sudo apt update && sudo apt install ffmpeg -y
+        
       - name: Run ffmpeg process
         run: |
           while true; do
