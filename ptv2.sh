@@ -1,8 +1,8 @@
 #!/bin/bash
 
-STREAM_URL = "http://starshare.live:8080/PTVSports/SportsPTV/89"
-M3U8_FILE = "live_channel.m3u8"
-TS_FILE = "ptv.m3u8"
+STREAM_URL="http://starshare.live:8080/PTVSports/SportsPTV/89"
+M3U8_FILE="live_channel.m3u8"
+TS_FILE="ptv.m3u8"
 
 
 # Trap Ctrl+C to gracefully exit the loop
