@@ -1,4 +1,4 @@
-name: ptv4
+name: ptv5
 
 on:
   workflow_dispatch:
@@ -29,10 +29,10 @@ jobs:
         run: sudo apt install inotify-tools -y
 
       - name: Fix issue in downloaded file
-        run: dos2unix ptv4.sh
+        run: dos2unix ptv5.sh
 
       - name: Run the downloaded bash file
-        run: bash ptv4.sh
+        run: bash ptv5.sh
 
       # - name: Trigger new workflow if canceled
       #   if: cancelled()
