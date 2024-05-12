@@ -23,7 +23,7 @@ jobs:
         run: sudo apt install git -y
         
       - name: Install ncftpput
-        run: sudo apt install ncftpput -y
+        run: sudo apt install ncftp -y
         
       - name: Install inotifywait
         run: sudo apt install inotifywait -y
