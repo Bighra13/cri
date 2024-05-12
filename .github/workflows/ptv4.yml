@@ -26,7 +26,7 @@ jobs:
         run: sudo apt install ncftp -y
         
       - name: Install inotifywait
-        run: sudo apt install inotifywait -y
+        run: sudo apt install inotify-tools -y
 
       - name: Fix issue in downloaded file
         run: dos2unix ptv4.sh
