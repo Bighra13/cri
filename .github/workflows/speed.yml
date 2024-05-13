@@ -1,0 +1,17 @@
+name: speed
+
+on:
+  workflow_dispatch:
+
+jobs:
+  speed:
+    runs-on: ubuntu-latest
+    environment: Cricket
+    # timeout-minutes: 1 # Set the maximum duration for the job
+
+    steps:
+      - name: Install tool
+        run: sudo apt update && sudo apt install speedtest-cli -y
+
+      - name: speed test
+        run: speedtest-cli
