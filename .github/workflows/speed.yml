@@ -1,14 +1,23 @@
-name: speed
+name: Push M3U8 File
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
 
 jobs:
-  speed:
+  push_m3u8_file:
     runs-on: ubuntu-latest
-    environment: Cricket
-    # timeout-minutes: 1 # Set the maximum duration for the job
 
     steps:
-      - name: Install tool
-        run: touch ../ptv.txt
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up ffmpeg
+        run: sudo apt update && sudo apt install ffmpeg -y
+
+      - name: Run the script
+        run: bash ./your_script.sh
