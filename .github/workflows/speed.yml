@@ -1,4 +1,4 @@
-name: Push File with Curl
+name: Create file
 
 on:
   push:
@@ -6,21 +6,23 @@ on:
       - main
 
 jobs:
-  push_file:
+  create-file:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        
-      - name: Checkout repository
-        run: touch ptv.txt
-        
-      - name: Create and push file
-        env:
-          GITHUB_TOKEN: ${{ secrets.API_KEY }}
-        run: |
-          FILE_CONTENT=$(base64 -w 0 ptv.txt)
-          curl -X PUT -H "Authorization: token ${{ secrets.API_KEY }}" \
-               -H "Accept: application/vnd.github.v3+json" \
-               https://api.github.com/repos/{owner}/{repo}/contents/{path}/ptv.txt \
-               -d "{\"message\":\"commit message\",\"content\":\"$FILE_CONTENT\"}"
+      - name: Create file
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.API_KEY}}
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const filePath = path.join(process.env.GITHUB_WORKSPACE, 'example.txt');
+            fs.writeFileSync(filePath, 'Hello, world!');
+            github.rest.repos.createOrUpdateFile({
+              path: 'example.txt',
+              message: 'Create example.txt',
+              content: fs.readFileSync(filePath, 'base64'),
+              repo: context.repo,
+              sha: context.sha
+            });
