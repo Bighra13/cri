@@ -1,19 +1,23 @@
-name: Push M3U8 File
+name: Push File with Curl
 
 on:
   push:
     branches:
       - main
 
-permissions:
-  contents: write
-
 jobs:
-  push_m3u8_file:
+  push_file:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run the script
-        run: bash ./my_script.sh
+      - name: Create and push file
+        env:
+          GITHUB_TOKEN: ${{ secrets.API_KEY }}
+        run: |
+          FILE_CONTENT=$(base64 -w 0 your-file.txt)
+          curl -X PUT -H "Authorization: token $GITHUB_TOKEN" \
+               -H "Accept: application/vnd.github.v3+json" \
+               https://api.github.com/repos/{owner}/{repo}/contents/{path}/your-file.txt \
+               -d "{\"message\":\"commit message\",\"content\":\"$FILE_CONTENT\"}"
