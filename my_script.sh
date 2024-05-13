@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# This is a sample Bash script
-# It will be accessed by the GitHub Actions workflow
+# The name of the text file you want to create
+filename="my_text_file.txt"
 
-echo "Hello from my_script.sh!"
-echo "The job was triggered by a ${{ github.event_name }} event."
-echo "The name of the branch is ${{ github.ref }}."
-echo "Your repository is ${{ github.repository }}."
+# The text you want to write into the file
+text="Hello, this is some sample text."
+
+# Create a new text file with the specified name and write the text into it
+echo "$text" > "$filename"
